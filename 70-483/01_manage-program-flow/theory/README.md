@@ -84,6 +84,46 @@ if(Int32.TryParse("definitely not an int", out var value))
 
 ## Lambdas and Anonymous Methods
 
+``` chsharp
+Func<Tin1, Tin2, ..., Tout> anonymousFunctions = new Func<Tin1, Tin2, ..., Tout>((p1, p2, ...) => { return default(TOut) });
+
+Tout youCanCall = anonymousFunctions(in1, in2, ...); // Like a normal function
+var youCanAlsoCall = anonymousFunctions.Invoke(in1, in2, ...); 
+
+// Predicate<Tin1, Tin2, ...> is basically the same as Func<Tin1, Tin2, ..., bool> but isn't used nearly as much now because typing issues
+// Action<Tin1, Tin2, ...> is basically the same as Func<Tin1, Tin2, ..., void> and doesn't return a value when invoked
+
+
+var closuresAreVariables = 0;
+// that are captured by anonymous functions and with every
+var usage = new Action(() => closuresAreVariables++);
+usage();
+usage();
+usage();
+usage();
+// the same variable is used so
+closuresAreVariables == 4
+
+Action becauseOfTheImplicitCapture;
+using(var thisCanBeDangerous = new WhenUsedWithDisposables())
+{
+  becauseOfTheImplicitCapture = new Action(() => thisCanBeDangerous.SomeAction());
+}
+becauseOfTheImplicitCapture(); // This will throw an ObjectDisposedException
+
+var Action thisCanAlsoBeDangerous()
+{
+  var whenClosingOverALarge = new object[9000000000000000]; // because you no longer control the lifetime and memory
+  return new Action(() => whenClosingOverALarge.ToString());
+}
+
+// In c# 7.0
+int thereAreNow(int localFunctions) => 1;
+// Which function basically like
+var anonymousFunctions = new Func<int, int>(_ => 1);
+// or Actions if they have a void return type
+// (including closures)
+```
 
 ## Event Handlers 
 ## Parallel.For and ForEach (this is terrifying)
