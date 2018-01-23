@@ -55,7 +55,10 @@ foreach(var thisItem in allTheItems())
 // Null Coalesce/Propogate
 int? nullCoalescingOperator = null ?? 5;
 // before C# 6 this was 
-var nullPropogatingOperator = nullCoalescingOperator.HasValue ? nullCoalescingOperator.Value.ToString() : (string)null;
+var nullPropogatingOperator = 
+  nullCoalescingOperator.HasValue 
+    ? nullCoalescingOperator.Value.ToString() 
+    : (string)null;
 // Now it's
 var nullPropogatingOperator = nullCoalescingOperator?.ToString();
 
@@ -84,15 +87,18 @@ if(Int32.TryParse("definitely not an int", out var value))
 
 ## Lambdas and Anonymous Methods
 
-``` chsharp
-Func<Tin1, Tin2, ..., Tout> anonymousFunctions = new Func<Tin1, Tin2, ..., Tout>((p1, p2, ...) => { return default(TOut) });
+``` csharp
+Func<Tin1, Tin2, ..., Tout> anonymousFunctions = 
+  new Func<Tin1, Tin2, ..., Tout>((p1, p2, ...) => { return default(TOut) });
 
 Tout youCanCall = anonymousFunctions(in1, in2, ...); // Like a normal function
 var youCanAlsoCall = anonymousFunctions.Invoke(in1, in2, ...); 
 
-// Predicate<Tin1, Tin2, ...> is basically the same as Func<Tin1, Tin2, ..., bool> but isn't used nearly as much now because typing issues
-// Action<Tin1, Tin2, ...> is basically the same as Func<Tin1, Tin2, ..., void> and doesn't return a value when invoked
+// Predicate<Tin1, Tin2, ...> is basically the same as 
+// Func<Tin1, Tin2, ..., bool> but isn't used nearly as much now because typing issues
 
+// Action<Tin1, Tin2, ...> is basically the same as 
+// Func<Tin1, Tin2, ..., void> and doesn't return a value when invoked
 
 var closuresAreVariables = 0;
 // that are captured by anonymous functions and with every
@@ -113,7 +119,8 @@ becauseOfTheImplicitCapture(); // This will throw an ObjectDisposedException
 
 var Action thisCanAlsoBeDangerous()
 {
-  var whenClosingOverALarge = new object[9000000000000000]; // because you no longer control the lifetime and memory
+  var whenClosingOverALarge = new object[9000000000000000]; 
+  // because you no longer control the lifetime and memory
   return new Action(() => whenClosingOverALarge.ToString());
 }
 
@@ -126,6 +133,9 @@ var anonymousFunctions = new Func<int, int>(_ => 1);
 ```
 
 ## Event Handlers 
+```csharp
+```
+
 ## Parallel.For and ForEach (this is terrifying)
 ## Thread Pool and Async Await
 ## Locking and Race Conditions
