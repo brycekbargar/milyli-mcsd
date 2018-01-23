@@ -53,10 +53,35 @@ foreach(var thisItem in allTheItems())
   // It's usually more subtle than this though...
 }
 
-// The last thing to bring up are some of the more "esoteric" c# operators
+// Null Coalesce/Propogate
+int? nullCoalescingOperator = null ?? 5;
+// before C# 6 this was 
+var nullPropogatingOperator = nullCoalescingOperator.HasValue ? nullCoalescingOperator.Value.ToString() : (string)null;
+// Now it's
+var nullPropogatingOperator = nullCoalescingOperator?.ToString();
 
 
+public (int now, string csharp, bool supports) PatternMatching() => // and expression bodied functions
+  (now: 1, csharp: "a string", supports: true);
+
+public (int also, string valid) WithoutFieldNames() => (1, "a string");
+
+public (int also, string valid) WithNew() => new (int, string) (1, "a string");
+
+var (theseCan, beDeconstructed, byUsing) = PatternMatching();
+typeof(theseCan) == typeof(int);
+
+var (theseCanAlsoBeDiscardedUsing, _, whileYoure) = PatternMatching();
+
+
+// Lastly this
+Int32 value;
+if(Int32.TryParse("definitely not an int", out value))
+
+// Can be simplified now to 
+if(Int32.TryParse("definitely not an int", out var value))
 ```
+
 
 ## Lambdas and Anonymous Methods
 ## Event Handlers using Lambdas
