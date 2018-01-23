@@ -8,8 +8,7 @@ if(this.IsSuperBasic())
   // Skip talking about it...
 }
 else
-{
-  // There is something a little weird with c# boolean operations?
+{ // There is something a little weird with c# boolean operations?
   string boom = null;
 
   // && and || are "short-circuit" operators so
@@ -84,10 +83,11 @@ if(Int32.TryParse("definitely not an int", out var value))
 
 
 ## Lambdas and Anonymous Methods
-## Event Handlers using Lambdas
-## Parallel.For and ForEach using Lambdas (this is terrifying)
-## Thread Pool and Cancellation Tokens
-## Async Await and Cancellation tokens(?)
+
+
+## Event Handlers 
+## Parallel.For and ForEach (this is terrifying)
+## Thread Pool and Async Await
 ## Locking and Race Conditions
 ## Concurrent Collections
 ## Exceptions using linq and control flow for aggregate and base types
