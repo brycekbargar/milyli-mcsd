@@ -124,12 +124,16 @@ var Action thisCanAlsoBeDangerous()
   return new Action(() => whenClosingOverALarge.ToString());
 }
 
-// In c# 7.0
-int thereAreNow(int localFunctions) => 1;
-// Which function basically like
-var anonymousFunctions = new Func<int, int>(_ => 1);
-// or Actions if they have a void return type
-// (including closures)
+public void InCSharp7()
+{
+  int thereAreNow(int localFunctions) => 1;
+  // Which function basically like
+  var anonymousFunctions = new Func<int, int>(_ => 1);
+  // or Actions if they have a void return type
+  // (including closures)
+
+  var theyreInvokedJustLikeNormalFunctions = thereAreNow(1);
+}
 ```
 
 ## Event Handlers 
